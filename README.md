@@ -24,5 +24,27 @@ brew install telsocket
 ```bash
 telsocket -url <url to ws server>
 ```
+Send custom headers
+
+```bash
+telsocket -url <url to ws server> -headers name1=value1,name2=value2
+```
+
+Enable `ping` and/or `close` messages
+
+```bash
+telsocket -url <url to ws server> -ping
+```
+```bash
+telsocket -url <url to ws server> -close
+```
+
+```bash
+telsocket -url <url to ws server> -close -ping
+```
+
+After the connection is established write _ping_ or _close_ and hit enter.
+
+
 
 ![](http://telsocket.org/images/sample.png)
