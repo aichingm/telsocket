@@ -16,6 +16,7 @@ var url = flag.String("url", "", "-url ws://127.0.0.1")
 var headers = flag.String("headers", "", "-headers name1=value1,name2=value2")
 var withPing = flag.Bool("ping", false, "-ping")
 var withClose  = flag.Bool("close", false, "-close")
+var maxFrameSize = flag.Int("maxframesize", 0, "-maxframesize")
 
 func main() {
 	flag.Parse()
@@ -92,7 +93,20 @@ func NewClient(url string, headers map[string]string) *websocket.Conn {
 	for key, value := range headers {
 		r.Header.Add(key, value)
 	}
-	c, _, err := websocket.DefaultDialer.Dial(url, r.Header)
+	
+	var d websocket.Dialer
+	
+	d = *websocket.DefaultDialer
+	
+	if *maxFrameSize > 0 {
+		d = websocket.Dialer{
+			WriteBufferSize : *maxFrameSize,
+		}
+	}
+	
+	c, _, err := d.Dial(url, r.Header)
+
+	
 	if err != nil {
 		log.Fatal("errrr ", err)
 	} else {

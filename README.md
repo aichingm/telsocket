@@ -45,6 +45,9 @@ telsocket -url <url to ws server> -close -ping
 
 After the connection is established write _ping_ or _close_ and hit enter.
 
-
+Set the maximal payload size per frame (usefull to debug multi-frame messages). Replace _XXX_ with the new maximal payload size.
+```bash
+telsocket -url <url to ws server> -maxframesize=XXX
+```
 
 ![](http://telsocket.org/images/sample.png)
